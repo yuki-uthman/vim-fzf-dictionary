@@ -37,7 +37,7 @@ function! s:open_dictionary(options) abort
   let yoffset =  ( line - 1.0 + adjust_row ) / (&lines - height)
   
   let len = len(word)
-  let xoffset =  ( col - 3.0 - len + adjust_col) / (&columns - width)
+  let xoffset =  ( col - 1.0 - len + adjust_col) / (&columns - width)
 
   let reverse = v:false
   if yoffset > 1
@@ -47,7 +47,8 @@ function! s:open_dictionary(options) abort
 
   " +i case sensitive flag for fzf
   " let options = ['+i']
-  let options = []
+  " remove prompt arrow
+  let options = ['--prompt=']
 
   if reverse
     call extend(options, ['--layout=default'] )
