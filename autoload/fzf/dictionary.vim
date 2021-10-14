@@ -25,7 +25,8 @@ function! s:open_dictionary(options) abort
 
   " -I no file name 
   " -s case-sensitive
-  let cmd = "rg -I --case-sensitive '" .. word .. "' " .. join(split(&dictionary, ','))
+  " ^chars to make it match only at the beginning of the word
+  let cmd = "rg -I --case-sensitive '^" .. word .. "' " .. join(split(&dictionary, ','))
 
   let height = a:options.height
   let width = a:options.width
