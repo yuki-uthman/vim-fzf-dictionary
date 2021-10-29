@@ -19,26 +19,8 @@ set cpo&vim
 
 "=============================================================================
 
-function! s:default() abort
-  return #{
-        \height: 7,
-        \width: 20,
-        \row: 0,
-        \col: 0,
-        \}
-endfunc
 
-function! s:init_fzf_dictionary() abort
-  let obj = {}
-  let obj = get(g:, 'fzf_dictionary_options', s:default())
-
-
-  return obj
-endfunction
-
-let options = s:init_fzf_dictionary()
-
-inoremap <Plug>(fzf-dictionary-open) <cmd>call fzf#dictionary#open(options)<CR>
+inoremap <Plug>(fzf-dictionary-open) <cmd>call fzf#dictionary#open()<CR>
 
 "=============================================================================
 

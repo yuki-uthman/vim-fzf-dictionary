@@ -13,13 +13,31 @@ let s:cpo_save=&cpo
 set cpo&vim
 "=============================================================================
 
+function! s:default() abort
+  return #{
+        \height: 7,
+        \width: 20,
+        \row: 0,
+        \col: 0,
+        \}
+endfunc
+
+function! s:init_fzf_dictionary() abort
+  let obj = {}
+  let obj = get(g:, 'fzf_dictionary_options', s:default())
+
+  return obj
+endfunction
+
 function! s:get_previous_word()
   let lig = getline(line('.'))
   let lig = strpart(lig,0,col('.')-1)
   return matchstr(lig, '\<\k*\>\s*$')
 endfunction
 
-function! s:open_dictionary(options) abort
+function! s:open_dictionary() abort
+
+  let options = s:init_fzf_dictionary()
 
   let word = s:get_previous_word()
 
@@ -28,10 +46,10 @@ function! s:open_dictionary(options) abort
   " ^chars to make it match only at the beginning of the word
   let cmd = "rg -I --case-sensitive '^" .. word .. "' " .. join(split(&dictionary, ','))
 
-  let height = a:options.height
-  let width = a:options.width
-  let adjust_row = a:options.row
-  let adjust_col = a:options.col
+  let height = options.height
+  let width = options.width
+  let adjust_row = options.row
+  let adjust_col = options.col
 
   let line = winline()
   let col = wincol()
@@ -72,9 +90,9 @@ function! s:open_dictionary(options) abort
    call fzf#vim#complete(cmd, dict)
 endfunc
 
-function! fzf#dictionary#open(options) abort
+function! fzf#dictionary#open() abort
 
-  call s:open_dictionary(a:options)
+  call s:open_dictionary()
 endfunc
 
 "=============================================================================
