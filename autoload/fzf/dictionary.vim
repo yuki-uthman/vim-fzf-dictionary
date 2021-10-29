@@ -17,8 +17,8 @@ function! s:default() abort
   return #{
         \height: 7,
         \width: 20,
-        \row: 0,
-        \col: 0,
+        \down: 0,
+        \right: 0,
         \}
 endfunc
 
@@ -48,8 +48,8 @@ function! s:open_dictionary() abort
 
   let height = options.height
   let width = options.width
-  let adjust_row = options.row
-  let adjust_col = options.col
+  let adjust_row = options.down
+  let adjust_col = options.right
 
   let line = winline()
   let col = wincol()
