@@ -35,7 +35,7 @@ function! s:open_dictionary(options) abort
 
   let line = winline()
   let col = wincol()
-  let yoffset =  ( line - 1.0 + adjust_row ) / (&lines - height)
+  let yoffset =  ( line - 0.0 + adjust_row ) / (&lines - height)
   
   let len = len(word)
   let xoffset =  ( col - 1.0 - len + adjust_col) / (&columns - width)
@@ -43,7 +43,8 @@ function! s:open_dictionary(options) abort
   let reverse = v:false
   if yoffset > 1
     let reverse = v:true
-    let yoffset =  ( line - height - 0.0 - adjust_row) / (&lines - height)
+    let yoffset =  ( line - height + 1.0 - adjust_row) / (&lines - height)
+    let xoffset =  ( col - 1.0 - len + adjust_col) / (&columns - width)
   endif
 
   " +i case sensitive flag for fzf
