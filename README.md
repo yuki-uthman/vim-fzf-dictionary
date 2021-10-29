@@ -40,14 +40,14 @@ Put this in your init.vim.
 ## Configurations
 
 You can customize the size and the position of the fzf window.
-Row and col are to move around the position of the window relative to the
-cursor. Row moves the window down and col moves the window to the right.
+Down and right are to adjust the position of the window relative to the
+cursor. Down and right moves the window down and right respectively.
 ```viml
   " default values
   let g:fzf_dictionary_options = #{
-        \height: 7,
-        \width: 20,
-        \row: 0,
-        \col: 0,
+        \height :   7,
+        \width  :  20,
+        \down   :   0,
+        \right  :   0,
         \}
 ```
