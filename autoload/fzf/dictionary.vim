@@ -35,6 +35,10 @@ function! s:get_previous_word()
   return matchstr(lig, '\<\k*\>\s*$')
 endfunction
 
+function! s:add_space(lines)
+  return a:lines[0] .. " "
+endfunction
+
 function! s:open_dictionary() abort
 
   let options = s:init_fzf_dictionary()
@@ -70,9 +74,17 @@ function! s:open_dictionary() abort
   " remove prompt arrow
   let options = ['--prompt=']
 
+  " use space to enter
+  call extend(options, ['--bind=space:accept'] )
+
+  " go to the first line when query change
+  call extend(options, ['--bind=change:first'] )
+
+
   if reverse
     call extend(options, ['--layout=default'] )
   endif
+
 
   let window = #{
         \yoffset: yoffset, 
@@ -84,6 +96,7 @@ function! s:open_dictionary() abort
   let dict = #{
         \source: cmd,
         \window: window,
+        \reducer: function('s:add_space'),
         \options: options
         \}
 
